@@ -1,6 +1,6 @@
-# rest-example
+# MINIM 1 per Carla Luján
 
-This project is a REST API example for managing music tracks. It is built with Java using Jersey for REST services, Grizzly as the HTTP server, and Swagger for API documentation.
+Descripció de com està el projecte, errors, coses que falten per implementar:
 
 ## High-Level Server Structure
 
