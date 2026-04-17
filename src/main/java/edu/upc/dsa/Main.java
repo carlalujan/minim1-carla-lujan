@@ -35,11 +35,11 @@ public class Main {
         beanConfig.setHost("localhost:8080");
         beanConfig.setBasePath("/dsaApp");
         beanConfig.setContact("support@example.com");
-        beanConfig.setDescription("REST API for Library Management System");
+        beanConfig.setDescription("REST API for Flight Management System");
         beanConfig.setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html");
         beanConfig.setResourcePackage("edu.upc.dsa.services");
         beanConfig.setTermsOfServiceUrl("http://www.example.com/resources/eula");
-        beanConfig.setTitle("Library REST API");
+        beanConfig.setTitle("Flight Management REST API");
         beanConfig.setVersion("1.0.0");
         beanConfig.setScan(true);
 
