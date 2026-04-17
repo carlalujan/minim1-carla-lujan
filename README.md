@@ -1,5 +1,6 @@
-# rest-example
+# MINIM 1 per Carla Luján
 
+<<<<<<< HEAD
 This project is a REST API example for managing music tracks. It is built with Java using Jersey for REST services, Grizzly as the HTTP server, and Swagger for API documentation.
 ## Part I
 En aquesta part he implementat les qüestions bàsiques del mínim. He de mencionar que com a id de vols i avions he ficat F1, F2,... i P1, P2,P3... en comptes de en els vols ficar els identificadors de vols normals als aeroports com VTXXX perquè aixì em resultava més intuitiu.
@@ -43,6 +44,9 @@ http://localhost:8080/dsaApp/
     - `http://localhost:8080/dsaApp/flights/F1`
     - `http://localhost:8080/dsaApp/flights/planes/P1`
     - `http://localhost:8080/dsaApp/flights/F1/luggages`
+=======
+Descripció de com està el projecte, errors, coses que falten per implementar:
+>>>>>>> 35df7b6f3f49a1cfb1a810545899fa8b28c1901c
 
 ## High-Level Server Structure
 
