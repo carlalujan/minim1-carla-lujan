@@ -1,7 +1,5 @@
 # MINIM 1 per Carla Luján
 
-<<<<<<< HEAD
-This project is a REST API example for managing music tracks. It is built with Java using Jersey for REST services, Grizzly as the HTTP server, and Swagger for API documentation.
 ## Part I
 En aquesta part he implementat les qüestions bàsiques del mínim. He de mencionar que com a id de vols i avions he ficat F1, F2,... i P1, P2,P3... en comptes de en els vols ficar els identificadors de vols normals als aeroports com VTXXX perquè aixì em resultava més intuitiu.
 Com a id de persones per les maletes, he ficat noms.
@@ -35,6 +33,15 @@ En aquesta part he implementat la capa REST del projecte a travez de la classe '
 
 ### Errors trobats
     - els endpoints serveixen per consultar dades especifiques, però no donen llistes completes dels vols, maletes o avions. no és un error com a tal pero no està implementat
+    - nomes hi ha una excepció comú que és la de FlightNotFound, però la crido quan vull comprovar si un avió existeix
+
+## Actualització del projecte
+he afegit endpoints nous bàsics:
+- obtenir tots els avions
+- obtenir tots els vols
+- obtenir totes les maletes
+
+he arreglat un error que havia el test amb les maletes. com que l'estructura és una pila, la llista que estava utilitzant no respetava l'ordre de fons a exterior, i donava error al testGetLuggageByFlight. ho he corregit tornant una llista inversa, que seria l'ordre real de descàrrega.
 
 ### base URI
 
@@ -44,9 +51,6 @@ http://localhost:8080/dsaApp/
     - `http://localhost:8080/dsaApp/flights/F1`
     - `http://localhost:8080/dsaApp/flights/planes/P1`
     - `http://localhost:8080/dsaApp/flights/F1/luggages`
-=======
-Descripció de com està el projecte, errors, coses que falten per implementar:
->>>>>>> 35df7b6f3f49a1cfb1a810545899fa8b28c1901c
 
 ## High-Level Server Structure
 
@@ -75,9 +79,11 @@ graph TD
 ```
 
 ### Main Components:
-- **TracksService**: REST service that exposes endpoints to manage tracks (GET, POST, etc.).
+- **FlightService**: REST service that exposes endpoints to manage flights (GET, POST, etc.).
 - **TextService**: Simple REST service for text responses.
-- **TracksManager**: Interface and implementation for the business logic of track management.
-- **Track**: Data model representing a music track.
+- **FlightManager**: Interface and implementation for the business logic of flights management.
+- **Fligh**: Data model representing a flight, with an id, the id of the plane assignated, time of arrival and leaving, origin and destination.
+- **Plane**: Data model representing a plane, with an id, model and company.
+- **Luggage**: Data model representing a luggage in a flight, with the user id owner, the id of the luggage and .
 - **MyExceptionMapper**: Exception mapper to handle API errors.
-- **TrackNotFoundException**: Custom exception for tracks not found.
+- **FlightNotFoundException**: Custom exception for flights or planes not found.

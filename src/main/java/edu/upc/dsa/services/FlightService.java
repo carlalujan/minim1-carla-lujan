@@ -52,15 +52,28 @@ public class FlightService {
                 this.fm.checkInLuggage("Elisabeth", "F2");
                 this.fm.checkInLuggage("Ruben", "F3");
                 this.fm.checkInLuggage("Jasmine", "F3");
-                this.fm.checkInLuggage("Albert", "F23");
+                this.fm.checkInLuggage("Albert", "F3");
             }
             catch (FlightNotFoundException e) {
                 logger.error("Error initializing sample data", e);
             }
         }
     }
+    @GET    //obtenir llista de avions
+    @ApiOperation(value = "Get all planes", notes = "Returns all planes")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful", response = Plane.class, responseContainer = "List")
+    })
+    @Path("/planes")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPlanes() {
+        logger.info("GET /flights/planes");
 
-   @POST
+        List<Plane> planes = this.fm.findAllPlanes();
+        GenericEntity<List<Plane>> entity = new GenericEntity<List<Plane>>(planes) {};
+        return Response.status(200).entity(entity).build();
+    }
+   @POST    //afegir avions
    @ApiOperation(value = "Add a new plane", notes = "Adds a new plane to the system")
    @ApiResponses(value = {
            @ApiResponse(code = 201, message = "Plane created successfully", response = Plane.class),
@@ -85,8 +98,7 @@ public class FlightService {
             return Response.status(500).entity("Unexpected error creating plane").build();
         }
     }
-
-    @GET
+    @GET    //trobar avio per ID
     @ApiOperation(value = "Get a plane by ID", notes = "Return a plane by its ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Plane found", response = Plane.class),
@@ -106,7 +118,7 @@ public class FlightService {
             return Response.status(404).entity("Plane not found").build();
         }
     }
-    @POST
+    @POST    //afegir nou vol
     @ApiOperation(value = "Add a new flight", notes = "Creates a new flight")
     @ApiResponses(value={
         @ApiResponse(code=201, message = "Flight created successfully", response = Flight.class),
@@ -148,7 +160,20 @@ public class FlightService {
             return Response.status(404).entity("Assigned plane not found").build();
         }
     }
-    @GET
+    @GET    //llista de vols
+    @ApiOperation(value = "Get all flights", notes = "Returns all flights")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful", response = Flight.class, responseContainer = "List")
+    })
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getFlights() {
+        logger.info("GET /flights");
+
+        List<Flight> flights = this.fm.findAllFlights();
+        GenericEntity<List<Flight>> entity = new GenericEntity<List<Flight>>(flights) {};
+        return Response.status(200).entity(entity).build();
+    }
+    @GET    //obtenir vol per ID
     @ApiOperation(value = "Get a flight", notes = "Returns a flight by id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful", response = Flight.class),
@@ -168,7 +193,7 @@ public class FlightService {
             return Response.status(404).entity("Flight not found").build();
         }
     }
-    @POST
+    @POST    //afegir maleta
     @ApiOperation(value = "Check in luggage", notes = "Adds luggage to a flight")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Luggage checked in successfully"),
@@ -196,6 +221,20 @@ public class FlightService {
         }
     }
     @GET
+    @ApiOperation(value = "Get all luggages", notes = "Returns all luggages")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful", response = Luggage.class, responseContainer = "List")
+    })
+    @Path("/luggages")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllLuggages() {
+        logger.info("GET /flights/luggages");
+
+        List<Luggage> luggages = this.fm.findAllLuggages();
+        GenericEntity<List<Luggage>> entity = new GenericEntity<List<Luggage>>(luggages) {};
+        return Response.status(200).entity(entity).build();
+    }
+    @GET //obtenir maleta per id de vol
     @ApiOperation(value = "Get luggage by flight", notes = "Returns all luggage of a flight in unloading order")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful", response = Luggage.class, responseContainer = "List"),

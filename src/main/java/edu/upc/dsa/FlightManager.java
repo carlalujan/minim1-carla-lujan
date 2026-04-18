@@ -21,11 +21,11 @@ public interface FlightManager {
     public String checkInLuggage(String userId, String flightId) throws FlightNotFoundException;
     public List<Luggage> getLuggageByFlight(String flightId) throws FlightNotFoundException;
 
-    // metodes per a gestionar maletes per si els necessito
-    // public Luggage getLuggage(String id) throws TrackNotFoundException;
-    // public Luggage addLuggage(String userId, String flightId) throws TrackNotFoundException;
-    // public Luggage getLuggageByUserId(String userId) throws TrackNotFoundException;
-    // public List<Luggage> findAllLuggages();
+    //consultar llistes de avions, vols i maletes
+    public List<Plane> findAllPlanes();
+    public List<Flight> findAllFlights();
+    public List<Luggage> findAllLuggages();
+
 
     public void clear();
     public int size();

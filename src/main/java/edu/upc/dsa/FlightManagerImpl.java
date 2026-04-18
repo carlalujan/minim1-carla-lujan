@@ -68,6 +68,13 @@ public class FlightManagerImpl implements FlightManager {
         return plane;
         
     }
+    //obtenir llista de avions
+    @Override
+    public List<Plane> findAllPlanes() {
+        logger.info("Getting all planes");
+        return new ArrayList<>(this.planes.values());
+    }
+
 // ===== FLIGHT OPERATIONS =====
     @Override
     public Flight addFlight(String id,String timeleaving, String timearrival, String planeassigned, String origin, String destination) throws FlightNotFoundException {
@@ -98,8 +105,14 @@ public class FlightManagerImpl implements FlightManager {
         logger.info("Flight found: " + id);
         return flight;
     }
+    //obtenir llista de vols
+    @Override
+    public List<Flight> findAllFlights() {
+        logger.info("Getting all flights");
+        return new ArrayList<>(this.flights.values());
+    }
 
-    // ===== BOOK OPERATIONS =====
+    // ===== LUGGAGE OPERATIONS =====
     @Override
     public String checkInLuggage(String userId, String flightId) throws FlightNotFoundException {
         logger.info("Checking in luggage for user: userId=" + userId + ", flightId=" + flightId);
@@ -129,12 +142,29 @@ public class FlightManagerImpl implements FlightManager {
 
         Stack<Luggage> stack = this.luggagesByFlight.get(flightId);
         //convertim en llista per a retornar en ordre de descarrega
-        List<Luggage> luggages = new LinkedList<>(stack);
+        List<Luggage> luggages = new LinkedList<>();
+        for (int i = stack.size() - 1; i >= 0; i--) {
+        luggages.add(stack.get(i));
+        }
 
         logger.info("Found " + luggages.size() + " luggages for flight: " + flightId);
         return luggages;
         
     }
+    //obtenir totes les maletes
+    @Override
+    public List<Luggage> findAllLuggages() {
+        logger.info("Getting all luggages");
+
+        List<Luggage> allLuggages = new ArrayList<>();
+
+        for (Stack<Luggage> stack : this.luggagesByFlight.values()) {
+            allLuggages.addAll(stack);
+        }
+
+        return allLuggages;
+    }
+
 
     @Override
     public void clear() {
